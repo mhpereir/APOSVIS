@@ -17,7 +17,7 @@ import json
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-imported = open('./APOSVIS/secure_info.json')
+imported = open('.env')
 imported = json.load(imported)
 
 # Quick-start development settings - unsuitable for production
