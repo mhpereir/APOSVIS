@@ -1,0 +1,15 @@
+#!/bin/bash
+# make sure you always put $f in double quotes to avoid any nasty surprises i.e."$f"
+
+echo "making directory repack/$1"
+mkdir "repack/"$1
+
+
+for i in *
+do
+    if test -f "$i" 
+    then
+	h5repack -L $i "repack/"$i
+        echo "will repack $i to repack/$i"
+    fi
+done

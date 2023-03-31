@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+<div> 
+    <h1>APOSTLE Visualization Tool</h1>
+    <br></br>
+    <form method="post" action="{% url 'submit_form' %}">
+        {% csrf_token %}
+        <div class="form-row" align-items-center>
+            <div class="form-group col-md-2">
+                <label for="vol">Volume Name</label>
+                <input type="text" class="form-control" id="vol" name="vol" placeholder="eg. V1" value="{{ form.vol.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="res">Resolution</label>
+                <input type="text" class="form-control" id="res" name="res" placeholder="eg. HR" value="{{ form.res.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="snapnum">Snapshot</label>
+                <input type="number" class="form-control" id="snapnum" name="snapnum" min="0" max="127" placeholder="eg. 1" value="{{ form.snapnum.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="grpid">Group ID</label>
+                <input type="number" class="form-control" id="grpid" name="grpid" min="1" placeholder="eg. 1" value="{{ form.grpid.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="subgrpid">SubGroup ID</label>
+                <input type="number" class="form-control" id="subgrpid" name="subgrpid" min="0" placeholder="eg. 0" value="{{ form.subgrpid.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="showwhich">Show</label>
+                <input type="text" class="form-control" id="showwhich" name="showwhich" placeholder="eg. All, Group, SubGroup" value="{{ form.showwhich.value }}">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="ptype">Particle Type</label>
+                <input type="text" class="form-control" id="ptype" name="ptype" placeholder="eg. DM, Gas, Star" value="{{ form.ptype.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="boxsize">Size of Box</label>
+                <input type="number" class="form-control" id="boxsize" name="boxsize" step="any" min="0" placeholder="eg. 1" value="{{ form.boxsize.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="boxsizeunit">Units of Size of Box</label>
+                <input type="text" class="form-control" id="boxsizeunit" name="boxsizeunit" placeholder="eg. RVir, kpc" value="{{ form.boxsizeunit.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="zmin">Colorbar scale Min</label>
+                <input type="text" class="form-control" id="zmin" name="zmin" placeholder="eg. 0" value="{{ form.zmin.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="zmax">Colorbar scale Max</label>
+                <input type="text" class="form-control" id="zmax" name="zmax" placeholder="eg. 10" value="{{ form.zmax.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="orien">Orientation of Image</label>
+                <input type="text" class="form-control" id="orien" name="orien" placeholder="eg. Face on" value="{{ form.orien.value }}">
+            </div>
+        </div>
+        
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="timelapse_flag" name="timelapse_flag" {% if form.timelapse_flag.value %}checked{% endif %}>
+            <label class="form-check-label" for="timelapse_flag">Plot time lapse?</label>
+        </div>
+        <p> </p>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="snapinit">Snapshot Initial</label>
+                <input type="number" class="form-control" id="snapinit" name="snapinit" min="0" max="127" placeholder="" value="{{ form.snapinit.value }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="snapfinal">Snapshot Final</label>
+                <input type="number" class="form-control" id="snapfinal" name="snapfinal" min="0" max="127" placeholder="" value="{{ form.snapfinal.value }}">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div>
+{% block view_plot %}
+{% endblock %}
+</div>
+
+
+{% endblock%}
+
