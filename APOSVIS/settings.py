@@ -11,16 +11,20 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import json
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+imported = open('./APOSVIS/secure_info.json')
+imported = json.load(imported)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zd@nqktk%7=y$sj@5at4bw!gmynf@aqd$=*7hcg-)besfpqzzy'
+SECRET_KEY = imported['django_secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apostle',
         'USER': 'mhpereir',
-        'PASSWORD': 'Banana24!',
+        'PASSWORD': imported['db_key'],
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
